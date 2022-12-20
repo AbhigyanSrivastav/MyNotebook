@@ -1,10 +1,12 @@
 let express=require('express')
-let app=express();
 let env=require('dotenv');
 let connectMongo=require('./db');
+let cors = require('cors')
+let app=express();
 env.config();
-const port=process.env.PORT;
+const port=5000;
 
+app.use(cors())
 app.use(express.json())
 //Endpoints
 app.use('/api/auth',require('./routes/auth'))

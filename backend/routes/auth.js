@@ -8,7 +8,8 @@ const fetchuser= require('../middleware/fetchuser');
 env.config();
 const router = express.Router();
 
-const SIGNATURE=process.env.SIGNATURE
+const SIGNATURE="shhh"
+
 //Route 1: Creating User,Login Not Required,POST method,param:name,email,password 
 router.post(
     '/signup',
