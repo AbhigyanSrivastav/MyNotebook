@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const env= require('dotenv');
 env.config();
 
-const SIGNATURE=process.env.SIGNATURE
+const SIGNATURE="shhh"
 
 const fetchuser=(req,res,next) =>{
 
@@ -15,7 +15,7 @@ const fetchuser=(req,res,next) =>{
     req.user=decoded.user
     next()
     }catch(error){
-        return res.status(403).send({error:error.message})
+        return res.status(403).send({error:error})
     }
 }
 

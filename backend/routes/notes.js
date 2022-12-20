@@ -21,11 +21,10 @@ router.post(
     async (req, res) => {
 
 
-        let success = false;
         // Finds the validation errors in this request and wraps them in an object with handy functions
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ success, errors: errors.array() });
+            return res.status(400).json({errors: errors.array() });
         }
         try {
 
@@ -36,10 +35,10 @@ router.post(
                     description: req.body.description
                 }
             );
-            success = true;
-            res.send({ success, note })
+
+            res.send(note)
         } catch (err) {
-            res.status(500).send({ success, message: err.message });
+            res.status(500).send({message: err.message });
 
         }
 
@@ -48,23 +47,20 @@ router.post(
 //Route 2: Fetching Notes,Login Required,POST method,param:NA
 
 router.post('/fetchnotes', fetchuser, async (req, res) => {
-    let success = false;
 
     try {
         let userId = req.user.id
         let notes = await Notes.find({ user: userId })
-        success = true;
-        res.send({ success, notes })
+        res.send(notes)
 
     } catch (err) {
-        res.status(500).send({ success, message: err.message });
+        res.status(500).send({message: err.message });
     }
 })
 
 //Route 3: Editing a note,Login Required,PUT method,param:noteId
 
 router.put('/editnote/:noteid', fetchuser, async (req, res) => {
-    let success = false;
     
     try {
         const{title,description}=req.body;
@@ -89,10 +85,9 @@ router.put('/editnote/:noteid', fetchuser, async (req, res) => {
            {$set:newNote},
            {new:true}
         )
-        success = true;
-        res.send({success,note})
+        res.send(note)
     } catch (err) {
-        res.status(500).send({ success, message: err.message });
+        res.status(500).send({message: err.message });
 
     }
 })
@@ -100,7 +95,6 @@ router.put('/editnote/:noteid', fetchuser, async (req, res) => {
 //Route 4: Deleting a note,Login Required,Delete method,param:noteId
 
 router.delete('/deletenote/:noteid', fetchuser, async (req, res) => {
-    let success = false;
     
     try {
         let noteId=req.params.noteid
@@ -114,10 +108,9 @@ router.delete('/deletenote/:noteid', fetchuser, async (req, res) => {
         }
   
         note=await Notes.findByIdAndDelete(noteId)
-        success = true;
-        res.send({success,message:"Note deleted successfully"})
+        res.send({message:"Note deleted successfully"})
     } catch (err) {
-        res.status(500).send({ success, message: err.message });
+        res.status(500).send({message: err.message });
 
     }
 })
