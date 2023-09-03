@@ -104,7 +104,6 @@ router.delete('/deletenote/:noteid', fetchuser, async (req, res) => {
         }
         if (note.user.toString()!==req.user.id){
         return res.status(404).json({ error: "Access Denied" });
-
         }
   
         note=await Notes.findByIdAndDelete(noteId)
@@ -114,4 +113,41 @@ router.delete('/deletenote/:noteid', fetchuser, async (req, res) => {
 
     }
 })
+
+// Route 5: Share a note, Login Required, POST method, param: noteId
+router.post('/sharenote/:noteid',fetchuser, async (req, res) => {
+    
+    try{
+        let noteId=req.params.noteid
+        let email = req.body.recipientEmail;
+        let note = await Notes.findById(noteId)
+        if (!note) {
+            return res.status(404).json({ error: "Not Found" });
+        }
+        if (note.user.toString()!==req.user.id){
+            return res.status(404).json({ error: "Access Denied" });
+        }
+
+            note.sharedWith.push(email)
+            note.shared=true
+            await note.save();
+            console.log(email)
+            res.send({ message: "Note shared successfully",email });
+    } catch (err) {
+            res.status(500).send({ message: err.message });
+        }
+})
+
+// Route 6: Fetch shared notes, Login Required, POST method, param: NA
+router.post('/fetchsharednotes', fetchuser, async (req, res) => {
+    try {
+      const userId = req.user.id;
+      let notes = await Notes.find({ user: userId, shared: true });
+  
+      res.send(notes);
+    } catch (err) {
+      res.status(500).send({ message: err.message });
+    }
+  });
+  
 module.exports = router

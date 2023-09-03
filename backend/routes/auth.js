@@ -58,7 +58,11 @@ router.post(
             const authToken = jwt.sign(data, SIGNATURE);
 
             success = true;
-            res.send({ success, authToken })
+            user={
+                name:user.name,
+                email:user.email
+            }
+            res.send({ success, authToken,user })
 
         } catch (err) {
             console.error(err.message);
@@ -102,7 +106,11 @@ router.post(
             const authToken = jwt.sign(data, SIGNATURE);
 
             success = true;
-            res.send({ success, authToken })
+            user={
+                name:user.name,
+                email:user.email
+            }
+            res.send({ success, authToken,user })
 
         } catch (err) {
             console.error(err.message);

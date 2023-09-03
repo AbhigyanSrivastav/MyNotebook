@@ -80,10 +80,44 @@ const NotesState = (props) => {
       console.log(json);
       setNotes(newNotes);
     }
+
+    const fetchSharedNotes = async () => {
+      try {
+        let response = await fetch(`http://127.0.0.1:5000/api/notes/fetchsharednotes`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            authToken: `${result.authToken}`,
+          },
+        });
+        let json = await response.json();
+        setNotes(json);
+      } catch (error) {
+        console.error('Error fetching shared notes:', error);
+      }
+    };
+  
+    const shareNote = async (noteId, recipientEmail) => {
+      try {
+        let response = await fetch(`http://127.0.0.1:5000/api/notes/sharenote/${noteId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            authToken: `${result.authToken}`,
+          },
+          body: JSON.stringify({ recipientEmail }),
+        });
+        let json = await response.json();
+        console.log('Note shared successfully:', json);
+      } catch (error) {
+        console.error('Error sharing note:', error);
+      }
+    };
+  
   return (
     <>
     {
-        <NoteContext.Provider value={{notes,fetchNotes,addNote,edtNote,dltNote}}>
+        <NoteContext.Provider value={{notes,fetchNotes,addNote,edtNote,dltNote,fetchSharedNotes,shareNote}}>
             {props.children}
         </NoteContext.Provider>
     }

@@ -3,6 +3,8 @@ import '../SignUp.css'
 import { Link } from "react-router-dom";
 import AuthContext from '../Context/Auth/AuthContext'
 import { useNavigate } from "react-router-dom";
+
+
 const SignUp = () => {
   const navigate = useNavigate();
   const value = useContext(AuthContext)
@@ -28,35 +30,57 @@ const SignUp = () => {
   
 
   return (
-    <div>
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-md-5">
-            <div className="card">
-              <h2 className="card-title text-center">Register</h2>
-              <div className="card-body py-md-4">
-                <form _lpchecked="1" onSubmit={handleSubmit} method='POST'>
-                  <div className="form-group">
-                    <input type="text" className="form-control" id="name" name="name" placeholder="Name" onChange={handleChange} />
-                  </div>
-                  <div className="form-group">
-                    <input type="email" className="form-control" id="email" name="email" placeholder="Email" onChange={handleChange} />
-                  </div>
-
-                  <div className="form-group">
-                    <input type="password" className="form-control" id="password" name="password" placeholder="Password" onChange={handleChange} />
-                  </div>
-                  <div className="d-flex flex-row align-items-center justify-content-between">
-                    <div> Been Here? <Link to="/login">Login</Link></div>
-                    <button className="btn btn-primary">Create Account</button>
-                  </div>
-                </form>
+    <div style={{backdropFilter:"blur(2rem)"}}>
+    <div className="container-fluid d-flex justify-content-center align-items-center vh-100">
+    <div className="col-md-5">
+        <div className="card">
+          <h2 className="card-title text-center mt-4">Register</h2>
+          <div className="card-body py-md-4">
+            <form onSubmit={handleSubmit}>
+              <div className="form-group mb-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="name"
+                  name="name"
+                  placeholder="Name"
+                  onChange={handleChange}
+                  required
+                />
               </div>
-            </div>
+              <div className="form-group mb-3">
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  placeholder="Email"
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              <div className="form-group mb-3">
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  name="password"
+                  placeholder="Password"
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="d-flex flex-column flex-md-row align-items-center justify-content-between">
+                <div className="mb-2 mb-md-0">Been Here? <Link to="/login">Login</Link></div>
+                <button type="submit" className="btn btn-primary">Create Account</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
+  </div>
   )
 }
 

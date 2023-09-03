@@ -1,0 +1,40 @@
+.notes-list-container {
+    margin-top: 50px;
+  }
+  
+  .container {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(8rem);
+  }
+  
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333333;
+  }
+  
+  .search-bar-container {
+    padding: 10px;
+  }
+  
+  .search-bar {
+    width: 80%;
+    max-width: 400px;
+    margin: 0 auto;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .search-bar::placeholder {
+    color: #999999;
+  }
+  
+  .col-md-4 {
+    width: 100%;
+    max-width: 400px;
+  }
+  

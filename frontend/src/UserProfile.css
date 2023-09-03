@@ -1,0 +1,57 @@
+/* Custom CSS for User Profile */
+body, html {
+    height: 90%;
+    margin: 0;
+  }
+  
+  .user-profile-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+  .user-profile-content {
+    max-width: 800px;
+    padding: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    color: white;
+    }
+  
+  .display-4 {
+    color: white;
+    font-weight: bold;
+  }
+  
+  .user-details-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .user-details {
+    border-radius: 0.5rem;
+    margin-bottom: .5rem;
+    /* background-color: #f9f9f9; */
+  }
+  
+  .user-details:first-child {
+    margin-bottom: 0;
+  }
+  
+  strong {
+    font-weight: bold;
+   
+  }
+
+  p {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .auth-token {
+    display: block;
+    word-wrap: break-word;
+  }
+  
